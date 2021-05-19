@@ -1,5 +1,5 @@
 import React from 'react';
-import SimpleFormExample from './components/login'
+import Login from './components/login/login'
 import './App.css';
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ function App() {
      <Router>
         <Switch>
           <Route path='/login'>
-            <SimpleFormExample/>
+            <Login/>
           </Route>
         </Switch>
      </Router>
