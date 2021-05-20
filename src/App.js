@@ -4,9 +4,11 @@ import SignUp from './components/signUp/signUp'
 import SignUpPrincipal from './components/signUp/signUpPrincipal'
 import SignUpTeacher from './components/signUp/signUpTeacher'
 import SignUpSubstitute from './components/signUp/signUpSubstitute'
+import AddInstitution from './components/signUp/addInstitution'
 import './App.css';
-import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch, Link, BrowserRouter as Router, useHistory } from 'react-router-dom';
 import signUp from './components/signUp/signUp';
+
 
 function App() {
   return (
@@ -28,6 +30,10 @@ function App() {
 
           <Route path='/signUpSubstitute'>
             <SignUpSubstitute/>
+          </Route>
+
+          <Route path='/addInstitution'>
+            <AddInstitution/>
           </Route>
 
           <Route path='/'>

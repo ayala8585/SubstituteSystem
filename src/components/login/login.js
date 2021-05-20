@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import ValidateTextField from '../common/validateTextField';
 import './login.css'
 
-
 const Login = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
