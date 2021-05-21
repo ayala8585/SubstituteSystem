@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ValidateTextField from '../common/validateTextField';
 import '../login/login.css'
@@ -68,8 +68,12 @@ const addInstitution=()=>{
         errorMessage={'שדה זה חייב להכיל מינימום 7 תווים'} />
 
 
-<Button variant="contained" color="primary" disableElevation onClick={addInstitution}>
+    <Button variant="contained" color="primary" disableElevation onClick={addInstitution}>
                 הוסף מוסד
+    </Button>
+
+    <Button variant="contained" color="primary" disableElevation>
+                הרשמה
     </Button>
 
       </div>
