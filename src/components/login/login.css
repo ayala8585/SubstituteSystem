@@ -7,3 +7,8 @@
     height: 55%;
     width: 35%;
 }
+.div1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

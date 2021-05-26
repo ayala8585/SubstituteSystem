@@ -12,7 +12,7 @@ import signUp from './components/signUp/signUp';
 
 function App() {
   return (
-   <div>
+   <div style="height: 100%;">
      <Router>
         <Switch>
           <Route path='/login'>
