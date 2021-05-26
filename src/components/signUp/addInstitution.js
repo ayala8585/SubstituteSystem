@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import ValidateTextField from '../common/validateTextField';
 import '../login/login.css'
 import { makeStyles } from '@material-ui/core/styles';
+import ValidateSelect from '../common/validateSelect'
+
+
 
 
 const AddInstitution=()=>{
@@ -26,7 +29,18 @@ const AddInstitution=()=>{
     const [BJGraduate, setBJGraduate] = useState('');
     const [picture, setPicture] = useState('');
 
-
+   
+   const toOption=(begin, end)=>{ 
+    const option=[];
+        for(let i=begin; i<=end; i++)
+        {
+            option.push(<option>{i}</option>)
+        }
+        return option;
+}
+        const require=[
+          <option>נדרש</option>,
+          <option>לא נדרש</option>];
 
     return(
         
@@ -55,23 +69,24 @@ const AddInstitution=()=>{
         <h3>דרישות מוסד</h3>
         <br/>
 
-<div>שנות נסיון</div>
-      <ValidateTextField value={experience}
-        onChange={(value) => setExperience(value)}
-        validate={() => { return experience==='' }}
-        errorMessage={'שדה חובה'} />
+<label>שנות נסיון</label>
+ 
+<ValidateSelect option={toOption(0,30)}/>
 
-<div>תעודת הוראה</div>
-      <ValidateTextField value={teachingCertificate}
+<label>תעודת הוראה</label>
+
+<ValidateSelect option={require}/>
+      {/* <ValidateTextField value={teachingCertificate}
         onChange={(value) => setTeachingCertificate(value)}
         validate={() => { return teachingCertificate==='' }}
-        errorMessage={'שדה חובה'} />
+        errorMessage={'שדה חובה'} /> */}
 
 <div>גיל מינימלי</div>
-      <ValidateTextField value={minAge}
+      {/* <ValidateTextField value={minAge}
         onChange={(value) => setMinAge(value)}
         validate={() => { return minAge==='' }}
-        errorMessage={'שדה חובה'} />
+        errorMessage={'שדה חובה'} /> */}
+<ValidateSelect option={toOption(16,40)}/>
 
 <div>מין</div>
       <ValidateTextField value={maleFemale}
