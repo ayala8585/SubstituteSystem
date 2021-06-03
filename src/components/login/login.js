@@ -6,12 +6,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import ValidateTextField from '../common/validateTextField';
 import './login.css'
 import Button from '@material-ui/core/Button';
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
 
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+
   const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -24,7 +26,10 @@ const Login = () => {
   const getUser = () => {
     fetch(`http://localhost:3000/login?userName=${userName}&password=${password}`)
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((token) => {
+        const decoded = jwt_decode(token);
+        console.log(decoded);
+      })
       .catch((err) => {
         console.log("error", err);
       });
@@ -46,7 +51,7 @@ const Login = () => {
           validate={() => { return password === '' }}
           errorMessage={'שדה חובה'} />
       </div>
-      <Button variant="contained" color="primary" disableElevation onClick={getUser}>
+      <Button variant="contained" color="primary" disableElevation onClick={getUser} disabled={!userName || !password}>
         כניסה
     </Button>
 

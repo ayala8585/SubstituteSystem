@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './components/login/login'
 import SignUp from './components/signUp/signUp'
 import SignUpPrincipal from './components/signUp/signUpPrincipal'
-import SignUpTeacher from './components/signUp/signUpTeacher'
+import GeneralSignUp from './components/signUp/generalSignUp'
 import SignUpSubstitute from './components/signUp/signUpSubstitute'
 import AddInstitution from './components/signUp/addInstitution'
 import './App.css';
@@ -12,7 +12,7 @@ import signUp from './components/signUp/signUp';
 
 function App() {
   return (
-   <div style="height: 100%;">
+   <div>
      <Router>
         <Switch>
           <Route path='/login'>
@@ -24,8 +24,8 @@ function App() {
             <SignUpPrincipal/>
           </Route>
 
-          <Route path='/signUpTeacher'>
-            <SignUpTeacher/>
+          <Route path='/generalSignUp'>
+            <GeneralSignUp/>
           </Route>
 
           <Route path='/signUpSubstitute'>
