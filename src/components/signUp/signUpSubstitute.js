@@ -1,7 +1,7 @@
 import React from 'react'
 
 const SignUpSubstitute=()=>{
-    return <div>signUpSubstitute</div>
+    return <div> hello!! signUpSubstitute dvory wednesdaygdgfjf</div>
 }
 
 export default SignUpSubstitute;
