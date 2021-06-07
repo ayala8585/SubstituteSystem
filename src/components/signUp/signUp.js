@@ -11,11 +11,7 @@ const SignUp = () => {
 let history=useHistory();
 
 const generalSignUp=()=>{
-    // history.push('/generalSignUp');
-    history.push({
-        pathname: '/generalSignUp',
-        state: { role: 1 }
-    });
+    history.push('/generalSignUp');
 }
 
 const nvigateToTeacher=()=>{
@@ -28,7 +24,7 @@ const nvigateToSabstitute=()=>{
 
     return (
         <div>
-            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp} role={1}>
+            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp} >
                 הרשם כמנהל
     </Button>
 
