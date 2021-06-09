@@ -4,6 +4,7 @@ import ValidateTextField from '../common/validateTextField';
 import '../login/login.css'
 import {useHistory} from "react-router-dom"
 import Button from '@material-ui/core/Button';
+import { connect } from "react-redux";
 
 
 const GeneralSignUp=(props)=>{
@@ -15,7 +16,7 @@ const GeneralSignUp=(props)=>{
 
   let history=useHistory();
 
-const addInstitution=()=>{
+const addInstitution=(props)=>{
     history.push('/addInstitution');
 }
 
@@ -68,7 +69,7 @@ const addInstitution=()=>{
 
 
 {
-    false?
+    props.type===1?
     <Button variant="contained" color="primary" disableElevation onClick={addInstitution} >
                 הוסף מוסד
     </Button>: null }
@@ -82,8 +83,17 @@ const addInstitution=()=>{
   )
 }
 
+const mapStateToProps = ({ user }) => {
+  return {
+      type: user.type,
+  };
 
-export default GeneralSignUp;
+};
+
+export default connect(mapStateToProps, { })(GeneralSignUp);
+
+
+
 
 
 

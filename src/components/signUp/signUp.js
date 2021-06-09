@@ -1,16 +1,19 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import {useHistory} from "react-router-dom"
+import setUserType from '../actions/index'
+import { connect } from "react-redux";
 
 
 
 
-const SignUp = () => {
+const SignUp = (props) => {
 
     
 let history=useHistory();
 
 const generalSignUp=()=>{
+    props.setUserType(1)
     history.push('/generalSignUp');
 }
 
@@ -38,6 +41,6 @@ const nvigateToSabstitute=()=>{
         </div>
     );
 }
-export default SignUp;
+export default connect(null, { setUserType })(SignUp);
 
 
