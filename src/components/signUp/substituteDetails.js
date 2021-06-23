@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import ValidateSelect from "../common/validateSelect";
+import ValidNumber from '../common/validateNumber'
+
 
 const SubstituteDetails = () => {
 
@@ -32,17 +34,16 @@ const SubstituteDetails = () => {
     return (
         <div>
             <label>תמונה</label>
-            <TextField>????</TextField>
+            <TextField>????</TextField><br/>
             <label>מספר שנות ניסיון</label>
-            <ValidateSelect options={toOption(0, 20)}></ValidateSelect>
+            <ValidateSelect options={toOption(0, 20)}></ValidateSelect><br/>
             <label>תעודת הוראה</label>
-            <TextField>????</TextField>
+            <TextField>????</TextField><br/>
             <label>גיל</label>
-            <ValidateSelect options={toOption(16, 50)}></ValidateSelect>
-            <label>גיל</label>
-            <ValidateSelect options={typeOption}></ValidateSelect>
+            <ValidateSelect options={toOption(16, 50)}></ValidateSelect><br/>
+            {/* <ValidateSelect options={typeOption}></ValidateSelect><br/> */}
             <label>בוגרת בית יעקב?</label>
-            <ValidateSelect options={BJGraduate}></ValidateSelect>
+            <ValidateSelect options={BJGraduate}></ValidateSelect><br/>
             {
                 isBJGraduate?(<>
                 <label>אישור לימודים</label>
@@ -51,6 +52,9 @@ const SubstituteDetails = () => {
             }
             <label>מקצועות</label>
             <ValidateSelect options={[]}></ValidateSelect>
+
+            <ValidNumber/>
+
         </div>
     )
 

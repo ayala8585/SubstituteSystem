@@ -5,6 +5,7 @@ import SignUpPrincipal from './components/signUp/signUpPrincipal'
 import GeneralSignUp from './components/signUp/generalSignUp'
 import SignUpSubstitute from './components/signUp/signUpSubstitute'
 import AddInstitution from './components/signUp/addInstitution'
+import AddInstitutionTeacher from './components/signUp/addInstitutionTeacher'
 import './App.css';
 import { Route, Switch, Link, BrowserRouter as Router, useHistory } from 'react-router-dom';
 import signUp from './components/signUp/signUp';
@@ -35,6 +36,11 @@ function App() {
           <Route path='/addInstitution'>
             <AddInstitution/>
           </Route>
+
+          <Route path='/addInstitution'>
+            <AddInstitutionTeacher/>
+          </Route>
+
 
           <Route path='/'>
             <Login/>

@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
 import SubstituteDetails from "./substituteDetails"
+import '../signUp/addInstitutionTeacher'
 
 
 const GeneralSignUp = (props) => {
@@ -17,8 +18,12 @@ const GeneralSignUp = (props) => {
 
   let history = useHistory();
 
-  const addInstitution = (props) => {
+  const addInstitution = () => {
     history.push('/addInstitution');
+  }
+
+  const addInstitutionTeacher = () => {
+    history.push('/addInstitutionTeacher');
   }
 
 
@@ -73,8 +78,18 @@ const GeneralSignUp = (props) => {
         <Button variant="contained" color="primary" disableElevation onClick={addInstitution} >
           הוסף מוסד
     </Button> : null}
+
+    {props.type === 2 ?
+        <Button variant="contained" color="primary" disableElevation onClick={addInstitutionTeacher} >
+          הוסף מוסד
+    </Button> : null}
+
+
       {
         props.type === 3 ? <SubstituteDetails></SubstituteDetails> : null}
+
+        
+
 
       <Button variant="contained" color="primary" disableElevation>
         הרשמה
