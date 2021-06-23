@@ -13,42 +13,47 @@ import signUp from './components/signUp/signUp';
 
 function App() {
   return (
-   <div>
-     <Router>
+    <div>
+      <Router>
         <Switch>
           <Route path='/login'>
-            <Login/>
-            <SignUp/>
+            <Login />
+            <SignUp />
           </Route>
 
           <Route path='/signUpPrincipal'>
-            <SignUpPrincipal/>
+            <SignUpPrincipal />
           </Route>
 
           <Route path='/generalSignUp'>
-            <GeneralSignUp/>
+            <GeneralSignUp />
           </Route>
 
           <Route path='/signUpSubstitute'>
-            <SignUpSubstitute/>
+            <SignUpSubstitute />
           </Route>
 
           <Route path='/addInstitution'>
-            <AddInstitution/>
+            <AddInstitution />
           </Route>
 
+<<<<<<< HEAD
           <Route path='/addInstitutionTeacher'>
             <AddInstitutionTeacher/>
+=======
+          <Route path='/addInstitution'>
+            <AddInstitutionTeacher />
+>>>>>>> 097e90805d33096f16b7eb9a693d2d4b212aa262
           </Route>
 
           <Route path='/'>
-            <Login/>
-            <SignUp/>
+            <Login />
+            <SignUp />
           </Route>
         </Switch>
-     </Router>
-  
-   </div>
+      </Router>
+
+    </div>
   );
 }
 
