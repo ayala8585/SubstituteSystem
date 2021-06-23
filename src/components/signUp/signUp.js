@@ -12,31 +12,23 @@ const SignUp = (props) => {
     
 let history=useHistory();
 
-const generalSignUp=()=>{
-    props.setUserType(1)
+const generalSignUp=(type)=>{
+    props.setUserType(type)
     history.push('/generalSignUp');
 }
 
-const nvigateToTeacher=()=>{
-    history.push('/signUpTeacher');
-}
-
-const nvigateToSabstitute=()=>{
-    props.setUserType(3)
-    history.push('/generalSignUp');
-}
 
     return (
         <div>
-            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp} >
+            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp(1)} >
                 הרשם כמנהל
     </Button>
 
-            <Button variant="contained" color="primary" disableElevation onClick={nvigateToTeacher}>
+            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp(2)}>
                 הרשם כמורה קבוע
     </Button>
 
-            <Button variant="contained" color="primary" disableElevation onClick={nvigateToSabstitute}>
+            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp(3)}>
                 הרשם כמורה ממלא מקום
     </Button>
         </div>
