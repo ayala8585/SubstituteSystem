@@ -35,35 +35,35 @@ const GeneralSignUp = (props) => {
     <div className="login">
       <h3>התחברות</h3>
 
-      <div>מספר זהות</div>
-      <ValidateTextField value={id}
+      <ValidateTextField text='מספר זהות'
+        value={id}
         onChange={(value) => setId(value)}
         validate={() => { return id.length < 7 }}
         errorMessage={'שדה זה חייב להכיל מינינום 7 תווים'} />
       <br />
-      <div>שם פרטי</div>
-      <ValidateTextField value={firstName}
+      <ValidateTextField text='שם פרטי'
+        value={firstName}
         onChange={(value) => setFirstName(value)}
         validate={() => { return firstName === '' }}
         errorMessage={'שדה חובה'} />
 
       <br />
-      <div>שם משפחה</div>
-      <ValidateTextField value={lastName}
+      <ValidateTextField text='שם משפחה'
+        value={lastName}
         onChange={(value) => setLastName(value)}
         validate={() => { return lastName === '' }}
         errorMessage={'שדה חובה'} />
 
       <br />
-      <div>מייל</div>
-      <ValidateTextField value={email}
+      <ValidateTextField text='מייל'
+        value={email}
         onChange={(value) => setEmail(value)}
         validate={() => { return email === '' }}
         errorMessage={'שדה חובה'} />
 
       <br />
-      <div>טלפון</div>
-      <ValidateTextField value={phone}
+      <ValidateTextField text='טלפון'
+        value={phone}
         onChange={(value) => setPhone(value)}
         validate={() => { return phone.length < 7 }}
         errorMessage={'שדה זה חייב להכיל מינימום 7 תווים'} />

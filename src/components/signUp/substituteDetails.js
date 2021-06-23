@@ -8,7 +8,7 @@ const SubstituteDetails = () => {
     const [yearsOfExperience, setYearsOfExperience] = useState('');
     const [teachingCertificate, setTeachingCertificate] = useState('');
     const [age, setAge] = useState('');
-    const [type, setType] = useState('');
+    const [gender, setGender] = useState('');
     const [isBJGraduate, setIsBJGraduate] = useState(false);
     const [approvalOfStudies, setApprovalOfStudies] = useState('');
     const [proffesions, setProffesions] = useState([]);
@@ -25,7 +25,7 @@ const SubstituteDetails = () => {
         <option>כן</option>,
         <option>לא</option>];
 
-    const typeOption = [
+    const genderOption = [
         <option>זכר</option>,
         <option>נקבה</option>];
 
@@ -33,24 +33,19 @@ const SubstituteDetails = () => {
         <div>
             <label>תמונה</label>
             <TextField>????</TextField>
-            <label>מספר שנות ניסיון</label>
-            <ValidateSelect options={toOption(0, 20)}></ValidateSelect>
+            <ValidateSelect text='מספר שנות ניסיון' options={toOption(0, 20)}></ValidateSelect>
             <label>תעודת הוראה</label>
             <TextField>????</TextField>
-            <label>גיל</label>
-            <ValidateSelect options={toOption(16, 50)}></ValidateSelect>
-            <label>גיל</label>
-            <ValidateSelect options={typeOption}></ValidateSelect>
-            <label>בוגרת בית יעקב?</label>
-            <ValidateSelect options={BJGraduate}></ValidateSelect>
+            <ValidateSelect text='גיל' options={toOption(16, 50)}></ValidateSelect>
+            <ValidateSelect text='מין' options={genderOption}></ValidateSelect>
+            <ValidateSelect text='בוגרת בית יעקב?' options={BJGraduate}></ValidateSelect>
             {
                 isBJGraduate?(<>
                 <label>אישור לימודים</label>
                 <TextField>???</TextField>
                 </>):null
             }
-            <label>מקצועות</label>
-            <ValidateSelect options={[]}></ValidateSelect>
+            <ValidateSelect text='מקצועות' options={[]}></ValidateSelect>
         </div>
     )
 
