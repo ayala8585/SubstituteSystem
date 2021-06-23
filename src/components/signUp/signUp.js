@@ -20,15 +20,15 @@ const generalSignUp=(type)=>{
 
     return (
         <div>
-            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp(1)} >
+            <Button variant="contained" color="primary" disableElevation onClick={()=>generalSignUp(1)} >
                 הרשם כמנהל
     </Button>
 
-            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp(2)}>
+            <Button variant="contained" color="primary" disableElevation onClick={()=>generalSignUp(2)}>
                 הרשם כמורה קבוע
     </Button>
 
-            <Button variant="contained" color="primary" disableElevation onClick={generalSignUp(3)}>
+            <Button variant="contained" color="primary" disableElevation onClick={()=>generalSignUp(3)}>
                 הרשם כמורה ממלא מקום
     </Button>
         </div>

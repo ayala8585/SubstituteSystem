@@ -37,10 +37,9 @@ function App() {
             <AddInstitution/>
           </Route>
 
-          <Route path='/addInstitution'>
+          <Route path='/addInstitutionTeacher'>
             <AddInstitutionTeacher/>
           </Route>
-
 
           <Route path='/'>
             <Login/>

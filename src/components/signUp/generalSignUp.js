@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom"
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
 import SubstituteDetails from "./substituteDetails"
-import '../signUp/addInstitutionTeacher'
+// import '../signUp/addInstitutionTeacher'
 
 
 const GeneralSignUp = (props) => {
@@ -79,7 +79,7 @@ const GeneralSignUp = (props) => {
           הוסף מוסד
     </Button> : null}
 
-    {props.type === 2 ?
+      {props.type === 2 ?
         <Button variant="contained" color="primary" disableElevation onClick={addInstitutionTeacher} >
           הוסף מוסד
     </Button> : null}
@@ -88,7 +88,7 @@ const GeneralSignUp = (props) => {
       {
         props.type === 3 ? <SubstituteDetails></SubstituteDetails> : null}
 
-        
+
 
 
       <Button variant="contained" color="primary" disableElevation>
