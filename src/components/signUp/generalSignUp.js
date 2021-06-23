@@ -1,24 +1,25 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ValidateTextField from '../common/validateTextField';
 import '../login/login.css'
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import Button from '@material-ui/core/Button';
 import { connect } from "react-redux";
+import SubstituteDetails from "./substituteDetails"
 
 
-const GeneralSignUp=(props)=>{
+const GeneralSignUp = (props) => {
   const [id, setId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
-  let history=useHistory();
+  let history = useHistory();
 
-const addInstitution=(props)=>{
+  const addInstitution = (props) => {
     history.push('/addInstitution');
-}
+  }
 
 
   const useStyles = makeStyles((theme) => ({
@@ -31,66 +32,67 @@ const addInstitution=(props)=>{
   }));
 
   return (
-      <div className="login"> 
+    <div className="login">
       <h3>התחברות</h3>
 
       <div>מספר זהות</div>
       <ValidateTextField value={id}
         onChange={(value) => setId(value)}
-        validate={() => { return id.length<7 }}
+        validate={() => { return id.length < 7 }}
         errorMessage={'שדה זה חייב להכיל מינינום 7 תווים'} />
-<br/>
+      <br />
       <div>שם פרטי</div>
       <ValidateTextField value={firstName}
         onChange={(value) => setFirstName(value)}
-        validate={() => { return firstName==='' }}
+        validate={() => { return firstName === '' }}
         errorMessage={'שדה חובה'} />
 
-<br/>
+      <br />
       <div>שם משפחה</div>
       <ValidateTextField value={lastName}
         onChange={(value) => setLastName(value)}
-        validate={() => { return lastName==='' }}
+        validate={() => { return lastName === '' }}
         errorMessage={'שדה חובה'} />
 
-<br/>
+      <br />
       <div>מייל</div>
       <ValidateTextField value={email}
         onChange={(value) => setEmail(value)}
-        validate={() => { return email==='' }}
+        validate={() => { return email === '' }}
         errorMessage={'שדה חובה'} />
 
-<br/>
+      <br />
       <div>טלפון</div>
       <ValidateTextField value={phone}
         onChange={(value) => setPhone(value)}
-        validate={() => { return phone.length<7 }}
+        validate={() => { return phone.length < 7 }}
         errorMessage={'שדה זה חייב להכיל מינימום 7 תווים'} />
 
 
-{
-    props.type===1?
-    <Button variant="contained" color="primary" disableElevation onClick={addInstitution} >
-                הוסף מוסד
-    </Button>: null }
+      {props.type === 1 ?
+        <Button variant="contained" color="primary" disableElevation onClick={addInstitution} >
+          הוסף מוסד
+    </Button> : null}
+      {
+        props.type === 3 ? <SubstituteDetails></SubstituteDetails> : null}
 
-    <Button variant="contained" color="primary" disableElevation>
-                הרשמה
+      <Button variant="contained" color="primary" disableElevation>
+        הרשמה
     </Button>
 
-      </div>
-      
+    </div>
+
   )
 }
 
 const mapStateToProps = ({ user }) => {
   return {
-      type: user.type,
+    type: user.type,
   };
 
 };
 
-export default connect(mapStateToProps, { })(GeneralSignUp);
+export default connect(mapStateToProps, {})(GeneralSignUp);
 
 
 

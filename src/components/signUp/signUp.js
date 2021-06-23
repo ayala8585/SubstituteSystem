@@ -22,7 +22,8 @@ const nvigateToTeacher=()=>{
 }
 
 const nvigateToSabstitute=()=>{
-    history.push('/signUpSubstitute');
+    props.setUserType(3)
+    history.push('/generalSignUp');
 }
 
     return (
