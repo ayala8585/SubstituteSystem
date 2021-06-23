@@ -34,18 +34,6 @@ const SubstituteDetails = () => {
     return (
         <div>
             <label>תמונה</label>
-<<<<<<< HEAD
-            <TextField>????</TextField><br/>
-            <label>מספר שנות ניסיון</label>
-            <ValidateSelect options={toOption(0, 20)}></ValidateSelect><br/>
-            <label>תעודת הוראה</label>
-            <TextField>????</TextField><br/>
-            <label>גיל</label>
-            <ValidateSelect options={toOption(16, 50)}></ValidateSelect><br/>
-            {/* <ValidateSelect options={typeOption}></ValidateSelect><br/> */}
-            <label>בוגרת בית יעקב?</label>
-            <ValidateSelect options={BJGraduate}></ValidateSelect><br/>
-=======
             <TextField>????</TextField>
             <ValidateSelect text='מספר שנות ניסיון' options={toOption(0, 20)}></ValidateSelect>
             <label>תעודת הוראה</label>
@@ -53,22 +41,13 @@ const SubstituteDetails = () => {
             <ValidateSelect text='גיל' options={toOption(16, 50)}></ValidateSelect>
             <ValidateSelect text='מין' options={genderOption}></ValidateSelect>
             <ValidateSelect text='בוגרת בית יעקב?' options={BJGraduate}></ValidateSelect>
->>>>>>> 6a84db8f1c4806544ffe0a31fc07c247b56b2df2
             {
                 isBJGraduate?(<>
                 <label>אישור לימודים</label>
                 <TextField>???</TextField>
                 </>):null
             }
-<<<<<<< HEAD
-            <label>מקצועות</label>
-            <ValidateSelect options={[]}></ValidateSelect>
-
-            <ValidNumber/>
-
-=======
             <ValidateSelect text='מקצועות' options={[]}></ValidateSelect>
->>>>>>> 6a84db8f1c4806544ffe0a31fc07c247b56b2df2
         </div>
     )
 
