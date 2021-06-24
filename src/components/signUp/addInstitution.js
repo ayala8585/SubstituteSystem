@@ -93,7 +93,7 @@ const AddInstitution = () => {
         validate={() => { return maleFemale === '' }}
         errorMessage={'שדה חובה'} />
 
-      <div>בוגרת בית יעקוב</div>
+      <div>בוגרת בית יעקב</div>
       <ValidateSelect option={require} />
       {/* <ValidateTextField value={BJGraduate}
         onChange={(value) => setBJGraduate(value)}
