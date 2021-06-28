@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
@@ -20,8 +20,8 @@ import Typography from '@material-ui/core/Typography';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-
-
+import SelectHour from './selectHour'
+import { useHistory } from "react-router-dom"
 
 
 const SubtractionReport=()=>{
@@ -58,10 +58,24 @@ const [secondary, setSecondary] = React.useState(false);
     matchFrom: 'start',
     stringify: (option) => option.title,
   });
-  //create useState and accept the value from SelectHour component
-  let subtractionHoursList=[{date:"aa/aa/aa",grade:'a'},{date:"bb/bb/bb",grade:'b'},{date:"cc/cc/cc",grade:'c'}];
 
-  //Handle the deletion
+  const deleteHour=(id)=>{
+    const newList = subtractionHoursList.filter((item) => item.id !== id);
+    setSubtractionHoursList(newList);
+  }
+
+  //create useState and accept the value from SelectHour component
+  const [subtractionHoursList, setSubtractionHoursList]=useState([{date:"aa/aa/aa",grade:'a' ,id: 1},{date:"bb/bb/bb",grade:'b',id: 2},{date:"cc/cc/cc",grade:'c',id: 3}]);
+
+  let history=useHistory();
+
+  const addHoure=()=>{
+    console.log("kkk")
+      history.push('/selectHour');
+  }
+
+  const [showSelectHour, setShowSelectHour]=useState(false);
+
   const listItems=()=>{
     return(subtractionHoursList.map(hour=> 
     <ListItem>
@@ -75,7 +89,7 @@ const [secondary, setSecondary] = React.useState(false);
           secondary={hour.grade}
         />
         <ListItemSecondaryAction>
-          <IconButton edge="end" aria-label="delete">
+          <IconButton edge="end" aria-label="delete" onClick={()=>deleteHour(hour.id)}>
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
@@ -83,7 +97,7 @@ const [secondary, setSecondary] = React.useState(false);
     ))};
 
   const selectDate=()=>{
-      return <selectDate></selectDate>
+      return <SelectHour/>
   }
 
 
@@ -128,9 +142,11 @@ const [secondary, setSecondary] = React.useState(false);
     </div>
 
 
-    <Button variant="contained" color="primary" disableElevation >
+    <Button variant="contained" color="primary" disableElevation onClick={()=>setShowSelectHour(true)}>
             הוספת שעת חיסור
           </Button>
+
+          {showSelectHour?<SelectHour/>: null}
     </>
   );
 

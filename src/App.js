@@ -7,6 +7,7 @@ import SignUpSubstitute from './components/signUp/signUpSubstitute'
 import AddInstitution from './components/signUp/addInstitution'
 import AddInstitutionTeacher from './components/signUp/addInstitutionTeacher'
 import SubtractionReport from './components/teacherPage/subtractionReport'
+import SelectHour from './components/teacherPage/selectHour'
 import './App.css';
 import { Route, Switch, Link, BrowserRouter as Router, useHistory } from 'react-router-dom';
 import signUp from './components/signUp/signUp';
@@ -44,6 +45,10 @@ function App() {
 
           <Route path='/subtractionReport'>
             <SubtractionReport />
+          </Route>
+
+          <Route path='/selectHour'>
+            <SelectHour/>
           </Route>
 
           <Route path='/'>
