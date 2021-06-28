@@ -35,19 +35,21 @@ const SubstituteDetails = () => {
         <div>
             <label>תמונה</label>
             <TextField>????</TextField>
-            <ValidateSelect text='מספר שנות ניסיון' options={toOption(0, 20)}></ValidateSelect>
+            <ValidateSelect option={toOption(0, 30)} />
+
+            <ValidateSelect text='מספר שנות ניסיון' option={toOption(0, 20)}/>
             <label>תעודת הוראה</label>
             <TextField>????</TextField>
-            <ValidateSelect text='גיל' options={toOption(16, 50)}></ValidateSelect>
-            <ValidateSelect text='מין' options={genderOption}></ValidateSelect>
-            <ValidateSelect text='בוגרת בית יעקב?' options={BJGraduate}></ValidateSelect>
+            <ValidateSelect text='גיל' option={toOption(16, 50)}></ValidateSelect>
+            <ValidateSelect text='מין' option={genderOption}></ValidateSelect>
+            <ValidateSelect text='בוגרת בית יעקב?' option={BJGraduate}></ValidateSelect>
             {
-                isBJGraduate?(<>
-                <label>אישור לימודים</label>
-                <TextField>???</TextField>
-                </>):null
+                isBJGraduate ? (<>
+                    <label>אישור לימודים</label>
+                    <TextField>???</TextField>
+                </>) : null
             }
-            <ValidateSelect text='מקצועות' options={[]}></ValidateSelect>
+            <ValidateSelect text='מקצועות' option={[]}></ValidateSelect>
         </div>
     )
 
