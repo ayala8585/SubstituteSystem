@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
@@ -24,34 +24,35 @@ import SelectHour from './selectHour'
 import { useHistory } from "react-router-dom"
 
 
-const SubtractionReport=()=>{
+const SubtractionReport = () => {
 
-    const institutionsList = [//select the teachers institutions list from db
-        { title: 'The Kid', year: 1921 },
-        { title: 'Inglourious Basterds', year: 2009 },
-        { title: 'Snatch', year: 2000 },
-        { title: '3 Idiots', year: 2009 },
-        { title: 'Monty Python and the Holy Grail', year: 1975 },
-      ];
-    
-    // const useStyles = makeStyles((theme) => ({
-    //     root: {
-    //       display: 'flex',
-    //       flexWrap: 'wrap',
-    //     },
-    //     textField: {
-    //       marginLeft: theme.spacing(1),
-    //       marginRight: theme.spacing(1),
-    //       width: '25ch',
-    //     },
-    //   }));
+  const [identity, setIdentity] =useState(0);
+  const institutionsList = [//select the teachers institutions list from db
+    { title: 'The Kid', year: 1921 },
+    { title: 'Inglourious Basterds', year: 2009 },
+    { title: 'Snatch', year: 2000 },
+    { title: '3 Idiots', year: 2009 },
+    { title: 'Monty Python and the Holy Grail', year: 1975 },
+  ];
 
-//   const classes = useStyles();
+  // const useStyles = makeStyles((theme) => ({
+  //     root: {
+  //       display: 'flex',
+  //       flexWrap: 'wrap',
+  //     },
+  //     textField: {
+  //       marginLeft: theme.spacing(1),
+  //       marginRight: theme.spacing(1),
+  //       width: '25ch',
+  //     },
+  //   }));
 
-// const classes = useStyles();
+  //   const classes = useStyles();
 
-const [dense, setDense] = React.useState(false);
-const [secondary, setSecondary] = React.useState(false);
+  // const classes = useStyles();
+
+  const [dense, setDense] = React.useState(false);
+  const [secondary, setSecondary] = React.useState(false);
 
 
   const filterOptions = createFilterOptions({
@@ -59,26 +60,53 @@ const [secondary, setSecondary] = React.useState(false);
     stringify: (option) => option.title,
   });
 
-  const deleteHour=(id)=>{
+  const deleteHour = (id) => {
     const newList = subtractionHoursList.filter((item) => item.id !== id);
     setSubtractionHoursList(newList);
   }
 
   //create useState and accept the value from SelectHour component
-  const [subtractionHoursList, setSubtractionHoursList]=useState([{date:"aa/aa/aa",grade:'a' ,id: 1},{date:"bb/bb/bb",grade:'b',id: 2},{date:"cc/cc/cc",grade:'c',id: 3}]);
+  const [subtractionHoursList, setSubtractionHoursList] = useState([]);
 
-  let history=useHistory();
+  let history = useHistory();
 
-  const addHoure=()=>{
+  const addHoure = () => {
     console.log("kkk")
-      history.push('/selectHour');
+    history.push('/selectHour');
   }
 
-  const [showSelectHour, setShowSelectHour]=useState(false);
+  const [showSelectHour, setShowSelectHour] = useState(false);
 
-  const listItems=()=>{
-    return(subtractionHoursList.map(hour=> 
-    <ListItem>
+  // const [subtractionDate, setSubtractionDate]=useState();
+  // const [startOfClass, setStartOfClass]=useState();
+  // const [endOfClass, setEndOfClass]=useState();
+
+  // const addToList=(date,start,end) => {
+  //   setSubtractionDate(date);
+  //   setStartOfClass(start);
+  //   setEndOfClass(end);
+  //   let hour={date:subtractionDate,
+  //     grade:'a' }
+  //   setSubtractionHoursList([...subtractionHoursList,hour])
+  // }
+
+  const addToList = (date, start, end) => {
+    // setSubtractionDate(date);
+    // setStartOfClass(start);
+    // setEndOfClass(end);
+    setIdentity(identity+1);
+    let hour = {
+      id: identity,
+      date: date,
+      grade: identity
+    }
+    setSubtractionHoursList([...subtractionHoursList, hour])
+  }
+
+
+  const listItems = () => {
+    return (subtractionHoursList.map(hour =>
+      <ListItem>
         <ListItemAvatar>
           <Avatar>
             <CalendarTodayIcon />
@@ -89,21 +117,22 @@ const [secondary, setSecondary] = React.useState(false);
           secondary={hour.grade}
         />
         <ListItemSecondaryAction>
-          <IconButton edge="end" aria-label="delete" onClick={()=>deleteHour(hour.id)}>
+          <IconButton edge="end" aria-label="delete" onClick={() => deleteHour(hour.id)}>
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
-    ))};
+    ))
+  };
 
-  const selectDate=()=>{
-      return <SelectHour/>
+  const selectDate = () => {
+    return <SelectHour />
   }
 
 
   return (
-      <>
-    <div >
+    <>
+      <div >
         <TextField
           id="outlined-full-width"
           label="פרוט הבקשה"
@@ -116,9 +145,9 @@ const [secondary, setSecondary] = React.useState(false);
           }}
           variant="outlined"
         />
-    </div>
+      </div>
 
-    <Autocomplete
+      <Autocomplete
         id="filter-demo"
         options={institutionsList}
         getOptionLabel={(option) => option.title}
@@ -128,25 +157,26 @@ const [secondary, setSecondary] = React.useState(false);
       />
 
 
-<div>
+      <div>
         <Grid item xs={12} md={6}>
           <Typography variant="h6" >
             שעות חיסור
           </Typography>
           <div>
             <List dense={dense}>
-            {listItems()}
+              {listItems()}
             </List>
           </div>
         </Grid>
-    </div>
+      </div>
 
 
-    <Button variant="contained" color="primary" disableElevation onClick={()=>setShowSelectHour(true)}>
-            הוספת שעת חיסור
+      <Button variant="contained" color="primary" disableElevation onClick={() => setShowSelectHour(true)}>
+        הוספת שעת חיסור
           </Button>
-
-          {showSelectHour?<SelectHour/>: null}
+      <br />
+      {showSelectHour ? <SelectHour addToList={addToList}  setShowSelectHour={setShowSelectHour}/> : null}
+      {/* setSubtractionDate={setSubtractionDate} setStartOfClass={setStartOfClass} setEndOfClass={setEndOfClass} */}
     </>
   );
 
@@ -177,10 +207,5 @@ export default SubtractionReport;
 //     margin: theme.spacing(4, 0, 2),
 //   },
 // }));
-
-
-
-
-
 
 
