@@ -11,6 +11,7 @@ import SelectHour from './components/teacherPage/selectHour'
 import './App.css';
 import { Route, Switch, Link, BrowserRouter as Router, useHistory } from 'react-router-dom';
 import signUp from './components/signUp/signUp';
+import LastSuggestions from './components/substituteTeacherPage/lastSuggestions';
 
 
 function App() {
@@ -49,6 +50,10 @@ function App() {
 
           <Route path='/selectHour'>
             <SelectHour/>
+          </Route>
+
+          <Route path='/lastSuggestions'>
+            <LastSuggestions/>
           </Route>
 
           <Route path='/'>
