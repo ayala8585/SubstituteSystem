@@ -24,6 +24,7 @@ import SelectHour from './selectHour'
 import { useHistory } from "react-router-dom"
 
 
+
 const SubtractionReport = () => {
 
   const [identity, setIdentity] =useState(0);
@@ -90,7 +91,7 @@ const SubtractionReport = () => {
   //   setSubtractionHoursList([...subtractionHoursList,hour])
   // }
 
-  const addToList = (date, start, end) => {
+  const addToList = (date, start, end, grade) => {
     // setSubtractionDate(date);
     // setStartOfClass(start);
     // setEndOfClass(end);
@@ -98,7 +99,9 @@ const SubtractionReport = () => {
     let hour = {
       id: identity,
       date: date,
-      grade: identity
+      grade: grade,
+      start: start,
+      end: end
     }
     setSubtractionHoursList([...subtractionHoursList, hour])
   }

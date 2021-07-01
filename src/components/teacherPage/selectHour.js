@@ -4,7 +4,9 @@ import * as startOfDay from "date-fns";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import 'date-fns';
+import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
+import FormControl from '@material-ui/core/FormControl';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -21,12 +23,13 @@ const SelectHour = (props) => {
   const [subtractionDate, setSubtractionDate]=useState('');
   const [startOfClass, setStartOfClass]=useState("08:00");
   const [endOfClass, setEndOfClass]=useState("08:45");
+  const [grade,setGrade]=useState('1th')
 
   const addDate=()=>{
     // props.setSubtractionDate(subtractionDate);
     // props.setStartOfClass(startOfClass);
     // props.setEndOfClass(endOfClass);
-    props.addToList(subtractionDate,startOfClass,endOfClass)
+    props.addToList(subtractionDate,startOfClass,endOfClass,grade)
     props.setShowSelectHour(false);
   }
 
@@ -44,6 +47,12 @@ const SelectHour = (props) => {
 
   const classes = useStyles();
 
+  const options=()=>{
+    const options=['1','2','3','4','5','6','7','8','9','10','11','12'];
+    let optionHtml=[];
+    options.map((option)=>{optionHtml.push(<option>{option}th</option>)});
+      return(optionHtml);
+  }
 
   return (
     <>
@@ -72,7 +81,7 @@ const SelectHour = (props) => {
           id="time"
           label="עד"
           type="time"
-          defaultValue="07:30"
+          defaultValue="08:45"
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -87,7 +96,7 @@ const SelectHour = (props) => {
           id="time"
           label="החל מ"
           type="time"
-          defaultValue="07:30"
+          defaultValue="08:00"
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -96,6 +105,15 @@ const SelectHour = (props) => {
             step: 300, // 5 min
           }}
         />
+
+        <FormControl variant="outlined" className={classes.formControl}>
+          <Select native 
+          value={grade}
+          onChange={(value)=>setGrade(value)}>
+             {options()}
+          </Select>
+          </FormControl>
+          
 
       </form>
           <Button variant="contained" color="primary" disableElevation onClick={addDate} >
