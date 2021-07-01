@@ -22,6 +22,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import SelectHour from './selectHour'
 import { useHistory } from "react-router-dom"
+import '../login/login.css'
 
 
 
@@ -91,7 +92,7 @@ const SubtractionReport = () => {
   //   setSubtractionHoursList([...subtractionHoursList,hour])
   // }
 
-  const addToList = (date, start, end, grade) => {
+  const addToList = (date, start, end, grade, profession) => {
     // setSubtractionDate(date);
     // setStartOfClass(start);
     // setEndOfClass(end);
@@ -101,7 +102,8 @@ const SubtractionReport = () => {
       date: date,
       grade: grade,
       start: start,
-      end: end
+      end: end,
+      profession: profession
     }
     setSubtractionHoursList([...subtractionHoursList, hour])
   }
@@ -109,14 +111,14 @@ const SubtractionReport = () => {
 
   const listItems = () => {
     return (subtractionHoursList.map(hour =>
-      <ListItem>
+      <ListItem key={hour.id}>
         <ListItemAvatar>
           <Avatar>
             <CalendarTodayIcon />
           </Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary={hour.date}
+          primary={hour.date.toLocaleDateString()}
           secondary={hour.grade}
         />
         <ListItemSecondaryAction>
@@ -134,7 +136,7 @@ const SubtractionReport = () => {
 
 
   return (
-    <>
+    <div>
       <div >
         <TextField
           id="outlined-full-width"
@@ -180,7 +182,12 @@ const SubtractionReport = () => {
       <br />
       {showSelectHour ? <SelectHour addToList={addToList}  setShowSelectHour={setShowSelectHour}/> : null}
       {/* setSubtractionDate={setSubtractionDate} setStartOfClass={setStartOfClass} setEndOfClass={setEndOfClass} */}
-    </>
+      <br />
+      {(subtractionHoursList.length>0 && !showSelectHour) ?<Button variant="contained" color="primary" disableElevation onClick={() =>{}}>
+        שליחת הבקשה
+          </Button>:null}
+          {/* post */}
+        </div>
   );
 
 }

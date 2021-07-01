@@ -7,6 +7,8 @@ import 'date-fns';
 import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
 import FormControl from '@material-ui/core/FormControl';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -14,22 +16,25 @@ import {
 
 const SelectHour = (props) => {
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+
+
+
+  const [subtractionDate, setSubtractionDate] = useState(new Date());
+  const [startOfClass, setStartOfClass] = useState("08:00");
+  const [endOfClass, setEndOfClass] = useState("08:45");
+  const [grade, setGrade] = useState('כיתה א');
+  const [profession, setProfession] = useState('יהדות');
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setSubtractionDate(date);
   };
 
-  const [subtractionDate, setSubtractionDate]=useState('');
-  const [startOfClass, setStartOfClass]=useState("08:00");
-  const [endOfClass, setEndOfClass]=useState("08:45");
-  const [grade,setGrade]=useState('1th')
-
-  const addDate=()=>{
+  const addDate = () => {
     // props.setSubtractionDate(subtractionDate);
     // props.setStartOfClass(startOfClass);
     // props.setEndOfClass(endOfClass);
-    props.addToList(subtractionDate,startOfClass,endOfClass,grade)
+    props.addToList(subtractionDate, startOfClass, endOfClass, grade, profession)
     props.setShowSelectHour(false);
   }
 
@@ -47,27 +52,30 @@ const SelectHour = (props) => {
 
   const classes = useStyles();
 
-  const options=()=>{
-    const options=['1','2','3','4','5','6','7','8','9','10','11','12'];
-    let optionHtml=[];
-    options.map((option)=>{optionHtml.push(<option>{option}th</option>)});
-      return(optionHtml);
+  const options = () => {
+    const options = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'יא', 'יב'];
+    let optionHtml = [];
+    options.map((option) => { optionHtml.push(<option>כיתה {option}</option>) });
+    return (optionHtml);
+  }
+
+  const professions=()=>{
+    //select from mongo
+    return (['הסטוריה','אנגלית','חשבון','גאוגרפיה','התעמלות']);
   }
 
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker 
-          value={subtractionDate}
-          onChange={(value)=>setSubtractionDate(value)}
+        <KeyboardDatePicker
+          onChange={handleDateChange}
           disableToolbar
           variant="inline"
-          format="MM/dd/yyyy"
+          format="dd/MM/yyyy"
           margin="normal"
           id="date-picker-inline"
           label="תאריך"
-          value={selectedDate}
-          onChange={handleDateChange}
+          value={subtractionDate}
           KeyboardButtonProps={{
             'aria-label': 'change date',
           }}
@@ -77,7 +85,7 @@ const SelectHour = (props) => {
 
       <form className={classes.container} noValidate>
         <TextField
-          onChange={(value)=>setEndOfClass(value)}
+          onChange={(value) => setEndOfClass(value)}
           id="time"
           label="עד"
           type="time"
@@ -92,7 +100,7 @@ const SelectHour = (props) => {
         />
 
         <TextField
-          onChange={(value)=>setStartOfClass(value)}
+          onChange={(value) => setStartOfClass(value)}
           id="time"
           label="החל מ"
           type="time"
@@ -107,26 +115,33 @@ const SelectHour = (props) => {
         />
 
         <FormControl variant="outlined" className={classes.formControl}>
-          <Select native 
-          value={grade}
-          onChange={(value)=>setGrade(value)}>
-             {options()}
+          <Select native
+            value={grade}
+            onChange={(event) => setGrade(event.target.value) }>
+            {options()}
           </Select>
-          </FormControl>
-          
+        </FormControl>
+
+        <Autocomplete
+        value={profession}
+        onSelect={(value)=>setProfession(value)}
+        id="combo-box-demo"
+        options={professions()}
+        getOptionLabel={(option) => option}
+        style={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label='מקצוע' variant="outlined" />}
+      />
+
 
       </form>
-          <Button variant="contained" color="primary" disableElevation onClick={addDate} >
-            אישור
+      <Button variant="contained" color="primary" disableElevation onClick={addDate} >
+        אישור
           </Button>
 
     </>
   )
 }
 export default SelectHour;
-
-
-
 
 
 
