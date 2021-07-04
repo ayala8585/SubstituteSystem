@@ -11,11 +11,8 @@ import SelectHour from './components/teacherPage/selectHour'
 import './App.css';
 import { Route, Switch, Link, BrowserRouter as Router, useHistory } from 'react-router-dom';
 import signUp from './components/signUp/signUp';
-<<<<<<< HEAD
 import LastSuggestions from './components/substituteTeacherPage/lastSuggestions';
-=======
 import Home from './components/teacherPage/home'
->>>>>>> 7541b6d55800463fc1d209b5d608f5a4823b28ae
 
 
 function App() {
@@ -53,16 +50,15 @@ function App() {
           </Route>
 
           <Route path='/selectHour'>
-            <SelectHour/>
+            <SelectHour />
           </Route>
 
-<<<<<<< HEAD
           <Route path='/lastSuggestions'>
-            <LastSuggestions/>
-=======
+            <LastSuggestions />
+          </Route>
+
           <Route path='/teacherHome'>
-            <Home/>
->>>>>>> 7541b6d55800463fc1d209b5d608f5a4823b28ae
+            <Home />
           </Route>
 
           <Route path='/'>
