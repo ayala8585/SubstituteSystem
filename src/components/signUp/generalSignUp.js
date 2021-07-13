@@ -92,7 +92,7 @@ const GeneralSignUp = (props) => {
 
 
       <Button variant="contained" color="primary" disableElevation>
-        הרשמה
+        אישור
     </Button>
 
     </div>
