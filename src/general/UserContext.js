@@ -8,9 +8,13 @@ export const UserContext = createContext({
 const UserProvider = ({ children }) => {
   const [userType, setUserType] = useState();
 
-  <UserContext.Provider value={{ userType: userType, setUserType: setUserType }}>
-    {children}
-  </UserContext.Provider>;
+  return (
+    <UserContext.Provider
+      value={{ userType: userType, setUserType: setUserType }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default UserProvider;
