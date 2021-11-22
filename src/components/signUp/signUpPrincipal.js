@@ -31,54 +31,68 @@ const addInstitution=()=>{
   }));
 
   return (
-      <div className="login"> 
+    <div className="login">
       <h3>התחברות</h3>
-
-      <div>מספר זהות</div>
-      <ValidateTextField value={id}
+      <ValidateTextField
+        label="מספר זהות"
+        text={id}
         onChange={(value) => setId(value)}
-        validate={() => { return id.length<7 }}
-        errorMessage={'שדה זה חייב להכיל מינינום 7 תווים'} />
-<br/>
-      <div>שם פרטי</div>
-      <ValidateTextField value={firstName}
+        validate={() => {
+          return id.length < 7;
+        }}
+        errorMessage={"שדה זה חייב להכיל מינינום 7 תווים"}
+      />
+      <ValidateTextField
+        label="שם פרטי"
+        text={firstName}
         onChange={(value) => setFirstName(value)}
-        validate={() => { return firstName==='' }}
-        errorMessage={'שדה חובה'} />
-
-<br/>
-      <div>שם משפחה</div>
-      <ValidateTextField value={lastName}
+        validate={() => {
+          return firstName === "";
+        }}
+        errorMessage={"שדה חובה"}
+      />
+      <ValidateTextField
+        labal="שם משפחה"
+        text={lastName}
         onChange={(value) => setLastName(value)}
-        validate={() => { return lastName==='' }}
-        errorMessage={'שדה חובה'} />
-
-<br/>
-      <div>מייל</div>
-      <ValidateTextField value={email}
+        validate={() => {
+          return lastName === "";
+        }}
+        errorMessage={"שדה חובה"}
+      />
+      <ValidateTextField
+        label="מייל"
+        text={email}
         onChange={(value) => setEmail(value)}
-        validate={() => { return email==='' }}
-        errorMessage={'שדה חובה'} />
-
-<br/>
-      <div>טלפון</div>
-      <ValidateTextField value={phone}
+        validate={() => {
+          return email === "";
+        }}
+        errorMessage={"שדה חובה"}
+      />
+      <ValidateTextField
+        label="טלפון"
+        text={phone}
         onChange={(value) => setPhone(value)}
-        validate={() => { return phone.length<7 }}
-        errorMessage={'שדה זה חייב להכיל מינימום 7 תווים'} />
-
-
-    <Button variant="contained" color="primary" disableElevation onClick={addInstitution}>
-                הוסף מוסד
-    </Button>
-
-    <Button variant="contained" color="primary" disableElevation>
-                הרשמה
-    </Button>
-
-      </div>
+        validate={() => {
+          return phone.length < 7;
+        }}
+        errorMessage={"שדה זה חייב להכיל מינימום 7 תווים"}
+      />
       
-  )
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        onClick={addInstitution}
+      >
+        הוסף מוסד
+      </Button>
+
+      <Button variant="contained" color="primary" disableElevation>
+        הרשמה
+      </Button>
+    </div>
+  );
 }
 
 

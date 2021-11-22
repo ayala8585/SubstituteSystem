@@ -15,8 +15,8 @@ const GeneralUpate = (props) => {
       <h3>התחברות</h3>
 
       <ValidateTextField
-        text="שם פרטי"
-        value={firstName}
+        label="שם פרטי"
+        text={firstName}
         onChange={(value) => setFirstName(value)}
         validate={() => {
           return firstName === "";
@@ -26,8 +26,8 @@ const GeneralUpate = (props) => {
 
       <br />
       <ValidateTextField
-        text="שם משפחה"
-        value={lastName}
+        label="שם משפחה"
+        text={lastName}
         onChange={(value) => setLastName(value)}
         validate={() => {
           return lastName === "";
@@ -37,8 +37,8 @@ const GeneralUpate = (props) => {
 
       <br />
       <ValidateTextField
-        text="מייל"
-        value={email}
+        label="מייל"
+        text={email}
         onChange={(value) => setEmail(value)}
         validate={() => {
           return email === "";
@@ -48,8 +48,8 @@ const GeneralUpate = (props) => {
 
       <br />
       <ValidateTextField
-        text="טלפון"
-        value={phone}
+        label="טלפון"
+        text={phone}
         onChange={(value) => setPhone(value)}
         validate={() => {
           return phone.length < 7;

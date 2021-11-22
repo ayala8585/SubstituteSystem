@@ -1,114 +1,81 @@
-import React, { useState } from 'react';
-import ValidateTextField from '../common/validateTextField';
-import '../login/login.css'
-import { makeStyles } from '@material-ui/core/styles';
-import ValidateSelect from '../common/validateSelect'
-
-
-
+import React, { useState } from "react";
+import ValidateTextField from "../common/validateTextField";
+import "../login/login.css";
+import { makeStyles } from "@material-ui/core/styles";
+import ValidateSelect from "../common/validateSelect";
 
 const AddInstitution = () => {
-
   const useStyles = makeStyles((theme) => ({
     root: {
-      '& .MuiTextField-root': {
+      "& .MuiTextField-root": {
         margin: theme.spacing(1),
         width: 200,
       },
     },
   }));
 
-
-  const [institutionSymbol, setInstitutionSymbol] = useState('');
-  const [institutionName, setInstitutionName] = useState('');
-  const [institutionAddress, setInstitutionAddress] = useState('');
-  const [experience, setExperience] = useState('');
-  const [teachingCertificate, setTeachingCertificate] = useState('');
-  const [minAge, setMinAge] = useState('');
-  const [maleFemale, setMaleFemale] = useState('');
-  const [BJGraduate, setBJGraduate] = useState('');
-  const [picture, setPicture] = useState('');
-
+  const [institutionSymbol, setInstitutionSymbol] = useState("");
+  const [institutionName, setInstitutionName] = useState("");
+  const [institutionAddress, setInstitutionAddress] = useState("");
+  const [experience, setExperience] = useState("");
+  const [teachingCertificate, setTeachingCertificate] = useState("");
+  const [minAge, setMinAge] = useState("");
+  const [maleFemale, setMaleFemale] = useState("");
+  const [BJGraduate, setBJGraduate] = useState("");
+  const [picture, setPicture] = useState("");
 
   const toOption = (begin, end) => {
     const option = [];
     for (let i = begin; i <= end; i++) {
-      option.push(<option>{i}</option>)
+      option.push(<option>{i}</option>);
     }
     return option;
-  }
-  const require = [
-    <option>נדרש</option>,
-    <option>לא נדרש</option>];
+  };
+  const require = [<option>נדרש</option>, <option>לא נדרש</option>];
+  const gender = [<option>זכר</option>, <option>נקבה</option>];
 
   return (
-
     <div className="login">
       <h3>הוספת מוסד</h3>
-
-      <div>סמל מוסד</div>
-      <ValidateTextField value={institutionSymbol}
+      <ValidateTextField
+        label="סמל מוסד"
+        text={institutionSymbol}
         onChange={(value) => setInstitutionSymbol(value)}
-        validate={() => { return institutionSymbol === '' }}
-        errorMessage={'שדה חובה'} />
-
-      <div>שם מוסד</div>
-      <ValidateTextField value={institutionName}
+        validate={() => {
+          return institutionSymbol === "";
+        }}
+        errorMessage={"שדה חובה"}
+      />
+      <ValidateTextField
+        label="שם מוסד"
+        text={institutionName}
         onChange={(value) => setInstitutionName(value)}
-        validate={() => { return institutionName === '' }}
-        errorMessage={'שדה חובה'} />
+        validate={() => {
+          return institutionName === "";
+        }}
+        errorMessage={"שדה חובה"}
+      />
 
-      <div>כתובת מוסד</div>
-      <ValidateTextField value={institutionAddress}
+      <ValidateTextField
+        label="כתובת מוסד"
+        text={institutionAddress}
         onChange={(value) => setInstitutionAddress(value)}
-        validate={() => { return institutionAddress === '' }}
-        errorMessage={'שדה חובה'} />
+        validate={() => {
+          return institutionAddress === "";
+        }}
+        errorMessage={"שדה חובה"}
+      />
 
-      <br />
       <h3>דרישות מוסד</h3>
-      <br />
 
-      <label>שנות נסיון</label>
-
-      <ValidateSelect option={toOption(0, 30)} />
-
-      <label>תעודת הוראה</label>
-
-      <ValidateSelect option={require} />
-      {/* <ValidateTextField value={teachingCertificate}
-        onChange={(value) => setTeachingCertificate(value)}
-        validate={() => { return teachingCertificate==='' }}
-        errorMessage={'שדה חובה'} /> */}
-
-      <div>גיל מינימלי</div>
-      {/* <ValidateTextField value={minAge}
-        onChange={(value) => setMinAge(value)}
-        validate={() => { return minAge==='' }}
-        errorMessage={'שדה חובה'} /> */}
-      <ValidateSelect option={toOption(16, 40)} />
-
-      <div>מין</div>
-      <ValidateTextField value={maleFemale}
-        onChange={(value) => setMaleFemale(value)}
-        validate={() => { return maleFemale === '' }}
-        errorMessage={'שדה חובה'} />
-
-      <div>בוגרת בית יעקב</div>
-      <ValidateSelect option={require} />
-      {/* <ValidateTextField value={BJGraduate}
-        onChange={(value) => setBJGraduate(value)}
-        validate={() => { return BJGraduate==='' }}
-        errorMessage={'שדה חובה'} /> */}
-
-      <div>תמונה</div>
-      <ValidateSelect option={require} />
-      {/* <ValidateTextField value={picture}
-        onChange={(value) => setPicture(value)}
-        validate={() => { return picture==='' }}
-        errorMessage={'שדה חובה'} />
-        */}
+      <ValidateSelect label="שנות נסיון" option={toOption(0, 30)} />
+      <ValidateSelect label="תעודת הוראה" option={require} />
+      <ValidateSelect label="גיל מינימלי" option={toOption(16, 40)} />
+      <ValidateSelect label="מין" option={gender} />
+      <ValidateSelect label="בוגרת בית יעקב" option={require} />
+      <ValidateSelect label="תמונה" option={require} />
     </div>
-  )
-}
+  );
+};
 
 export default AddInstitution;
