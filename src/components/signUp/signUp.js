@@ -29,7 +29,7 @@ const SignUp = (props) => {
         variant="contained"
         color="primary"
         disableElevation
-        onClick={() => generalSignUp(2)}
+        onClick={() => history.push("/SignUpTeacher")}
       >
         הרשם כמורה קבוע
       </Button>
