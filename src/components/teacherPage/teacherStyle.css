@@ -1,0 +1,9 @@
+h5{
+    color: rgb(110, 99, 99);
+}
+
+form[disabled]
+{
+  pointer-events: none;
+  opacity: 0.7;
+}

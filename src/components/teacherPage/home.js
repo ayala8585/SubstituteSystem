@@ -75,9 +75,9 @@ export default function ScrollableTabsButtonPrevent() {
           scrollButtons="off"
           aria-label="scrollable prevent tabs example"
         >
-          <Tab icon={<CalendarTodayIcon />} aria-label="phone" {...a11yProps(0)} />
-          <Tab icon={<HistoryIcon />} aria-label="favorite" {...a11yProps(1)} />
-          <Tab icon={<PersonPinIcon />} aria-label="person" {...a11yProps(2)} />
+          <Tab icon={<CalendarTodayIcon />} aria-label="phone" {...a11yProps(0)} title="דיווח על חיסור"/>
+          <Tab icon={<HistoryIcon />} aria-label="favorite" {...a11yProps(1)} title="הסטוריית חיסורים"/>
+          <Tab icon={<PersonPinIcon />} aria-label="person" {...a11yProps(2)} title="פרטי מורה"/>
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

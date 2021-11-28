@@ -19,10 +19,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ClearIcon from '@material-ui/icons/Clear';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import SelectHour from './selectHour'
 import { useHistory } from "react-router-dom"
 import '../login/login.css'
+import './teacherStyle.css'
 
 
 
@@ -123,7 +125,7 @@ const SubtractionReport = () => {
         />
         <ListItemSecondaryAction>
           <IconButton edge="end" aria-label="delete" onClick={() => deleteHour(hour.id)}>
-            <DeleteIcon />
+            <ClearIcon />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
@@ -166,6 +168,7 @@ const SubtractionReport = () => {
         <Grid item xs={12} md={6}>
           <Typography variant="h6" >
             שעות חיסור
+            {listItems().length==0?<h5>לא נבחרו שעות</h5>:null}
           </Typography>
           <div>
             <List dense={dense}>
