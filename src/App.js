@@ -8,11 +8,9 @@ import Home from "./components/teacherPage/home";
 import SelectHour from "./components/teacherPage/selectHour";
 import GeneralSignUp from "./components/signUp/generalSignUp";
 import SignUpTeacher from "./components/signUp/SignUpTeacher";
-import AddInstitution from "./components/signUp/addInstitution";
 import SignUpPrincipal from "./components/signUp/signUpPrincipal";
 import SignUpSubstitute from "./components/signUp/signUpSubstitute";
 import SubtractionReport from "./components/teacherPage/subtractionReport";
-import AddInstitutionTeacher from "./components/signUp/addInstitutionTeacher";
 import LastSuggestions from "./components/substituteTeacherPage/lastSuggestions";
 
 function App() {
@@ -37,12 +35,6 @@ function App() {
           </Route>
           <Route path="/signUpSubstitute">
             <SignUpSubstitute />
-          </Route>
-          <Route path="/addInstitution">
-            <AddInstitution />
-          </Route>
-          <Route path="/addInstitutionTeacher">
-            <AddInstitutionTeacher />
           </Route>
           <Route path="/subtractionReport">
             <SubtractionReport />

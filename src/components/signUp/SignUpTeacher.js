@@ -2,24 +2,29 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 
 import "./signUpTeacher.css";
+import ValidateSelect from "../common/validateSelect";
 import ValidateTextField from "../common/validateTextField";
 
-const SignUpTeacher = (props) => {
+const SignUpTeacher = () => {
   const [id, setId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [isInstitutionPanelOpen, setIsInstitutionPanelOpen] = useState(false);
+  const [institutions, setInstitutions] = useState([]);
+
+  const institutionsList = ["a", "b", "c"];
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(institutions);
     //TODO: handle submit
   };
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <h3>התחברות</h3>
+      <h3>רישום</h3>
 
       <ValidateTextField
         label="מספר זהות"
@@ -81,7 +86,11 @@ const SignUpTeacher = (props) => {
       </Button>
       {isInstitutionPanelOpen && (
         <>
-          institution to teacher
+          <ValidateSelect
+            label="בחר סמל מוסד"
+            options={institutionsList}
+            onChange={(e) => setInstitutions((prev) => [...prev, e])}
+          />
           <Button
             variant="contained"
             color="primary"

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { UserContext } from "../../general/UserContext";
 
-const SignUp = (props) => {
+const SignUp = () => {
   const history = useHistory();
 
   const { setUserType } = useContext(UserContext);
@@ -20,7 +20,7 @@ const SignUp = (props) => {
         variant="contained"
         color="primary"
         disableElevation
-        onClick={() => generalSignUp(1)}
+        onClick={() => history.push("/signUpPrincipal")}
       >
         הרשם כמנהל
       </Button>

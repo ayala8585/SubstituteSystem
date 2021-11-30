@@ -3,7 +3,7 @@ import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 
-const ValidateSelect = ({ label, option }) => {
+const ValidateSelect = ({ label, options, onChange }) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       "& .MuiTextField-root": {
@@ -19,7 +19,11 @@ const ValidateSelect = ({ label, option }) => {
     <>
       <label>{label}</label>
       <FormControl variant="outlined" className={classes.formControl}>
-        <Select native>{option}</Select>
+        <Select onChange={(event) => onChange(event.target.value)} native>
+          {options.map((option) => (
+            <option>{option}</option>
+          ))}
+        </Select>
       </FormControl>
     </>
   );
