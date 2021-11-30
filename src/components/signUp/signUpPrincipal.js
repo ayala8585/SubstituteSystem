@@ -22,6 +22,8 @@ const SignUpTeacher = () => {
   const [gender, setGender] = useState("");
   const [BJGraduate, setBJGraduate] = useState("");
 
+  const isnum = (val) => /^\d+$/.test(val);
+
   const toOption = (begin, end) => {
     const options = [];
     for (let i = begin; i <= end; i++) {
@@ -30,7 +32,7 @@ const SignUpTeacher = () => {
     return options;
   };
   const require = ["נדרש", "לא נדרש"];
-  const genderOptions = ["זכר", "נקבה" ];
+  const genderOptions = ["זכר", "נקבה"];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -91,9 +93,9 @@ const SignUpTeacher = () => {
         text={institutionSymbol}
         onChange={(value) => setInstitutionSymbol(value)}
         validate={() => {
-          return institutionSymbol === "";
+          return institutionSymbol === "" || !isnum(institutionSymbol);
         }}
-        errorMessage={"שדה חובה"}
+        errorMessage={"חובה להכניס מספרים בלבד"}
       />
       <ValidateTextField
         label="שם מוסד"
@@ -124,13 +126,13 @@ const SignUpTeacher = () => {
         errorMessage={"שדה חובה"}
       />
       <ValidateTextField
-        label="בית"
+        label="מספר"
         text={homeNumber}
         onChange={(value) => setHomeNumber(value)}
         validate={() => {
-          return homeNumber === "";
+          return homeNumber === "" || !isnum(homeNumber);
         }}
-        errorMessage={"שדה חובה"}
+        errorMessage={"חובה להכניס מספרים בלבד"}
       />
       <h1>דרישות מוסד</h1>
       <ValidateSelect
