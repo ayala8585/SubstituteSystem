@@ -11,15 +11,41 @@ const SignUpTeacher = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
   const [isInstitutionPanelOpen, setIsInstitutionPanelOpen] = useState(false);
   const [institutions, setInstitutions] = useState([]);
 
   const institutionsList = ["a", "b", "c"];
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(institutions);
-    //TODO: handle submit
+    const body = {
+      id,
+      firstName,
+      lastName,
+      email,
+      phone,
+      password,
+    };
+    console.log("body", body);
+    const result = await fetch("http://localhost:5000/teacher", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        // 'Access-Control-Allow-Origin': 'http://localhost:5000'
+      },
+      body: JSON.stringify({
+        id,
+        firstName,
+        lastName,
+        email,
+        phone,
+        password,
+      }),
+    });
+    console.log("result: ", result);
   };
 
   return (
@@ -73,7 +99,15 @@ const SignUpTeacher = () => {
         }}
         errorMessage={"שדה זה חייב להכיל מינימום 7 תווים"}
       />
-
+      <ValidateTextField
+        label="סיסמה לכניסות הבאות"
+        text={password}
+        onChange={(value) => setPassword(value)}
+        validate={() => {
+          return password.length < 6;
+        }}
+        errorMessage={"אורך הסיסמה מינימום 6 תווים"}
+      />
       <Button type="submit" variant="contained" color="primary">
         אישור
       </Button>
