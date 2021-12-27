@@ -30,11 +30,9 @@ const SignUpTeacher = () => {
     console.log("body", body);
     const result = await fetch("http://localhost:5000/teacher", {
       method: "POST",
-      mode: "cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        // 'Access-Control-Allow-Origin': 'http://localhost:5000'
       },
       body: JSON.stringify({
         id,
