@@ -31,8 +31,8 @@ const GeneralSignUp = (props) => {
       <h3>התחברות</h3>
 
       <ValidateTextField
-        text="מספר זהות"
-        value={id}
+        label="מספר זהות"
+        text={id}
         onChange={(value) => setId(value)}
         validate={() => {
           return id.length < 7;
@@ -41,8 +41,8 @@ const GeneralSignUp = (props) => {
       />
       <br />
       <ValidateTextField
-        text="שם פרטי"
-        value={firstName}
+        label="שם פרטי"
+        text={firstName}
         onChange={(value) => setFirstName(value)}
         validate={() => {
           return firstName === "";
@@ -52,8 +52,8 @@ const GeneralSignUp = (props) => {
 
       <br />
       <ValidateTextField
-        text="שם משפחה"
-        value={lastName}
+        label="שם משפחה"
+        text={lastName}
         onChange={(value) => setLastName(value)}
         validate={() => {
           return lastName === "";
@@ -63,8 +63,8 @@ const GeneralSignUp = (props) => {
 
       <br />
       <ValidateTextField
-        text="מייל"
-        value={email}
+        label="מייל"
+        text={email}
         onChange={(value) => setEmail(value)}
         validate={() => {
           return email === "";
@@ -74,8 +74,8 @@ const GeneralSignUp = (props) => {
 
       <br />
       <ValidateTextField
-        text="טלפון"
-        value={phone}
+        label="טלפון"
+        text={phone}
         onChange={(value) => setPhone(value)}
         validate={() => {
           return phone.length < 7;

@@ -1,15 +1,12 @@
-import React from 'react'
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import React from "react";
+import Select from "@material-ui/core/Select";
+import { makeStyles } from "@material-ui/core/styles";
+import FormControl from "@material-ui/core/FormControl";
 
-
-const ValidateSelect = (props) => {
-
-
+const ValidateSelect = ({ label, options, onChange }) => {
   const useStyles = makeStyles((theme) => ({
     root: {
-      '& .MuiTextField-root': {
+      "& .MuiTextField-root": {
         margin: theme.spacing(1),
         width: 200,
       },
@@ -20,13 +17,15 @@ const ValidateSelect = (props) => {
 
   return (
     <>
-    <label>{props.text}</label>
+      <label>{label}</label>
       <FormControl variant="outlined" className={classes.formControl}>
-        <Select native >
-          {props.option}
+        <Select onChange={(event) => onChange(event.target.value)} native>
+          {options.map((option) => (
+            <option>{option}</option>
+          ))}
         </Select>
       </FormControl>
     </>
-  )
-}
+  );
+};
 export default ValidateSelect;
