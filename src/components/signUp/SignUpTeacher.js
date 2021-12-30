@@ -1,110 +1,124 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { Button, TextField } from "@material-ui/core";
 
 import "./signUpTeacher.css";
 import ValidateSelect from "../common/validateSelect";
 import ValidateTextField from "../common/validateTextField";
 
+const validationSchema = yup.object({
+  id: yup
+    .string()
+    .required("שדה חובה")
+    .matches(/^\d+$/,"תעודת זהות מכילה ספרות בלבד")
+    .min(7, "שדה זה חייב להכיל מינינום 7 תווים"),
+  email: yup.string().required("שדה חובה").email("כתובת מייל לא חוקית"),
+  phone: yup
+    .string()
+    .required("שדה חובה")
+    .matches(/^\d+$/,"מספר טלפון מכיל ספרות בלבד")
+    .min(7, "שדה זה חייב להכיל מינינום 7 תווים"),
+  lastName: yup.string().required("שדה חובה"),
+  password: yup
+    .string()
+    .required("שדה חובה")
+    .min(6, "שדה זה חייב להכיל מינינום 6 תווים"),
+  firstName: yup.string().required("שדה חובה"),
+});
+
+const customHandleSubmit = async (values) => {
+  const body = {
+    id: values.id,
+    email: values.email,
+    phone: values.phone,
+    lastName: values.lastName,
+    password: values.password,
+    firstName: values.firstName,
+  };
+  console.log("body", body);
+  const result = await fetch("http://localhost:5000/teacher", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  console.log("result: ", result);
+};
+
 const SignUpTeacher = () => {
-  const [id, setId] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
   const [isInstitutionPanelOpen, setIsInstitutionPanelOpen] = useState(false);
   const [institutions, setInstitutions] = useState([]);
 
   const institutionsList = ["a", "b", "c"];
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const body = {
-      id,
-      firstName,
-      lastName,
-      email,
-      phone,
-      password,
-    };
-    console.log("body", body);
-    const result = await fetch("http://localhost:5000/teacher", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id,
-        firstName,
-        lastName,
-        email,
-        phone,
-        password,
-      }),
-    });
-    console.log("result: ", result);
-  };
+  const { handleSubmit, getFieldProps, touched, errors } = useFormik({
+    initialValues: {
+      id: "",
+      email: "",
+      phone: "",
+      lastName: "",
+      password: "",
+      firstName: "",
+      institutions: [],
+    },
+    onSubmit: customHandleSubmit,
+    validationSchema: validationSchema,
+    validateOnChange: false,
+  });
 
   return (
     <form onSubmit={handleSubmit} className="form">
       <h3>רישום</h3>
-
-      <ValidateTextField
+      <TextField
         label="מספר זהות"
-        text={id}
-        onChange={(value) => setId(value)}
-        validate={() => {
-          return id.length < 7;
-        }}
-        errorMessage={"שדה זה חייב להכיל מינינום 7 תווים"}
+        required
+        variant="outlined"
+        error={touched?.id && !!errors?.id}
+        helperText={touched?.id && errors?.id}
+        {...getFieldProps("id")}
       />
-      <ValidateTextField
+      <TextField
         label="שם פרטי"
-        text={firstName}
-        onChange={(value) => setFirstName(value)}
-        validate={() => {
-          return firstName === "";
-        }}
-        errorMessage={"שדה חובה"}
-      />
-
-      <ValidateTextField
+        required
+        variant="outlined"
+        error={touched?.firstName && !!errors?.firstName}
+        helperText={touched?.firstName && errors?.firstName}
+        {...getFieldProps("firstName")}
+      />{" "}
+      <TextField
         label="שם משפחה"
-        text={lastName}
-        onChange={(value) => setLastName(value)}
-        validate={() => {
-          return lastName === "";
-        }}
-        errorMessage={"שדה חובה"}
-      />
-
-      <ValidateTextField
+        required
+        variant="outlined"
+        error={touched?.lastName && !!errors?.lastName}
+        helperText={touched?.lastName && errors?.lastName}
+        {...getFieldProps("lastName")}
+      />{" "}
+      <TextField
         label="מייל"
-        text={email}
-        onChange={(value) => setEmail(value)}
-        validate={() => {
-          return email === "";
-        }}
-        errorMessage={"שדה חובה"}
+        required
+        variant="outlined"
+        error={touched?.email && !!errors?.email}
+        helperText={touched?.email && errors?.email}
+        {...getFieldProps("email")}
       />
-      <ValidateTextField
+      <TextField
         label="טלפון"
-        text={phone}
-        onChange={(value) => setPhone(value)}
-        validate={() => {
-          return phone.length < 7;
-        }}
-        errorMessage={"שדה זה חייב להכיל מינימום 7 תווים"}
+        required
+        variant="outlined"
+        error={touched?.phone && !!errors?.phone}
+        helperText={touched?.phone && errors?.phone}
+        {...getFieldProps("phone")}
       />
-      <ValidateTextField
+      <TextField
         label="סיסמה לכניסות הבאות"
-        text={password}
-        onChange={(value) => setPassword(value)}
-        validate={() => {
-          return password.length < 6;
-        }}
-        errorMessage={"אורך הסיסמה מינימום 6 תווים"}
+        required
+        variant="outlined"
+        error={touched?.password && !!errors?.password}
+        helperText={touched?.password && errors?.password}
+        {...getFieldProps("password")}
       />
       <Button type="submit" variant="contained" color="primary">
         אישור
