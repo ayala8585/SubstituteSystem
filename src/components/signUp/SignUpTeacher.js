@@ -27,7 +27,7 @@ const validationSchema = yup.object({
   firstName: yup.string().required("שדה חובה"),
 });
 
-const customHandleSubmit = async (values) => {
+const onSubmit = async (values) => {
   const body = {
     id: values.id,
     email: values.email,
@@ -64,9 +64,9 @@ const SignUpTeacher = () => {
       firstName: "",
       institutions: [],
     },
-    onSubmit: customHandleSubmit,
-    validationSchema: validationSchema,
+    onSubmit,
     validateOnChange: false,
+    validationSchema: validationSchema,
   });
 
   return (
