@@ -16,7 +16,7 @@ import {
   ListItemAvatar,
   ListItemSecondaryAction,
 } from "@material-ui/core";
-import { CalendarToday, Delete } from "@material-ui/icons";
+import { CalendarToday, Clear } from "@material-ui/icons";
 
 import "../login/login.css";
 import SelectHour from "./selectHour";
@@ -103,7 +103,7 @@ const SubtractionReport = () => {
             aria-label="delete"
             onClick={() => deleteHour(hour.id)}
           >
-            <Delete />
+            <Clear />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
@@ -144,7 +144,10 @@ const SubtractionReport = () => {
 
       <div>
         <Grid item xs={12} md={6}>
-          <Typography variant="h6">שעות חיסור</Typography>
+          <Typography variant="h6">
+            שעות חיסור
+            {listItems().length == 0 ? <h5>לא נבחרו שעות</h5> : null}
+          </Typography>
           <div>
             <List dense={dense}>{listItems()}</List>
           </div>

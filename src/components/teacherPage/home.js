@@ -70,9 +70,20 @@ export default function ScrollableTabsButtonPrevent() {
             icon={<CalendarToday />}
             aria-label="phone"
             {...a11yProps(0)}
+            title="דיווח על חיסור"
           />
-          <Tab icon={<History />} aria-label="favorite" {...a11yProps(1)} />
-          <Tab icon={<PersonPin />} aria-label="person" {...a11yProps(2)} />
+          <Tab
+            icon={<History />}
+            aria-label="favorite"
+            {...a11yProps(1)}
+            title="הסטוריית חיסורים"
+          />
+          <Tab
+            icon={<PersonPin />}
+            aria-label="person"
+            {...a11yProps(2)}
+            title="פרטי מורה"
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

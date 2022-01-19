@@ -12,7 +12,7 @@ const GeneralUpate = (props) => {
 
   return (
     <div>
-      <h3>התחברות</h3>
+      {/* <h3>התחברות</h3> */}
 
       <ValidateTextField
         label="שם פרטי"
@@ -57,9 +57,9 @@ const GeneralUpate = (props) => {
         errorMessage={"שדה זה חייב להכיל מינימום 7 תווים"}
       />
       <br />
-      <Button variant="contained" color="primary" disableElevation>
+      {/* <Button variant="contained" color="primary" disableElevation>
         אישור
-      </Button>
+      </Button> */}
     </div>
   );
 };
