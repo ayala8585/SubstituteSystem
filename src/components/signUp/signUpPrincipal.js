@@ -1,164 +1,240 @@
 import React, { useState } from "react";
+import * as yup from "yup";
+import { useFormik } from "formik";
 import Button from "@material-ui/core/Button";
+import { Checkbox, TextField, FormControlLabel } from "@material-ui/core";
 
 import "./signUpTeacher.css";
-import ValidateSelect from "../common/validateSelect";
-import ValidateTextField from "../common/validateTextField";
+import { RadioGroup } from "../ui";
 
-const SignUpTeacher = () => {
-  const [id, setId] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [institutionSymbol, setInstitutionSymbol] = useState("");
-  const [institutionName, setInstitutionName] = useState("");
-  const [city, setCity] = useState("");
-  const [street, setStreet] = useState("");
-  const [homeNumber, setHomeNumber] = useState("");
-  const [experience, setExperience] = useState("");
-  const [teachingCertificate, setTeachingCertificate] = useState("");
-  const [minAge, setMinAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [BJGraduate, setBJGraduate] = useState("");
+const genderOptions = [
+  { label: "זכר", value: "male" },
+  { label: "נקבה", value: "female" },
+];
 
-  const isnum = (val) => /^\d+$/.test(val);
+const onSubmit = async (values) => {
+  const result = await fetch("http://localhost:5000/principal", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(values),
+  });
+  console.log("result: ", result);
+};
 
-  const toOption = (begin, end) => {
-    const options = [];
-    for (let i = begin; i <= end; i++) {
-      options.push(i);
-    }
-    return options;
-  };
-  const require = ["נדרש", "לא נדרש"];
-  const genderOptions = ["זכר", "נקבה"];
+const validationSchema = yup.object({
+  id: yup
+    .string()
+    .required("שדה חובה")
+    .matches(/^\d+$/, "תעודת זהות מכילה ספרות בלבד")
+    .min(7, "שדה זה חייב להכיל מינינום 7 תווים"),
+  city: yup.string().required("שדה חובה"),
+  email: yup.string().required("שדה חובה").email("כתובת מייל לא חוקית"),
+  phone: yup
+    .string()
+    .required("שדה חובה")
+    .matches(/^\d+$/, "מספר טלפון מכיל ספרות בלבד")
+    .min(7, "שדה זה חייב להכיל מינינום 7 תווים"),
+  minAge: yup
+    .number()
+    .integer()
+    .min(18, "גיל מינימלי חוקי גדול מ18")
+    .max(40, "גיל מינימלי חוקי קטן מ40"),
+  gender: yup.string().oneOf(["male", "female"], "זכר או נקבה בלבד"),
+  street: yup.string().required("שדה חובה"),
+  lastName: yup.string().required("שדה חובה"),
+  password: yup
+    .string()
+    .required("שדה חובה")
+    .min(6, "שדה זה חייב להכיל מינינום 6 תווים"),
+  firstName: yup.string().required("שדה חובה"),
+  homeNumber: yup
+    .string()
+    .required("שדה חובה")
+    .matches(/^\d+$/, "מספר בית מכיל ספרות בלבד"),
+  institutionName: yup.string().required("שדה חובה"),
+  institutionEmail: yup
+    .string()
+    .required("שדה חובה")
+    .email("כתובת מייל לא חוקית"),
+  institutionPhone: yup
+    .string()
+    .required("שדה חובה")
+    .matches(/^\d+$/, "מספר טלפון מכיל ספרות בלבד")
+    .min(7, "שדה זה חייב להכיל מינינום 7 תווים"),
+  institutionSymbol: yup
+    .string()
+    .required("שדה חובה")
+    .matches(/^\d+$/, "סמל מוסד מכיל ספרות בלבד"),
+});
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //TODO: handle submit
-  };
+const SignUpPrincipal = () => {
+  const { handleSubmit, getFieldProps, touched, errors } = useFormik({
+    initialValues: {
+      id: "",
+      city: "",
+      email: "",
+      phone: "",
+      minAge: "",
+      gender: "",
+      street: "",
+      lastName: "",
+      password: "",
+      firstName: "",
+      homeNumber: "",
+      experience: "",
+      BJGraduate: false,
+      institutionName: "",
+      institutionEmail: "",
+      institutionPhone: "",
+      institutionSymbol: "",
+      teachingCertificate: false,
+    },
+    onSubmit,
+    validationSchema,
+    validateOnChange: false,
+  });
 
   return (
     <form onSubmit={handleSubmit} className="form">
-      <h3>רישום</h3>
-      <ValidateTextField
+      <h1>רישום</h1>
+      <TextField
         label="מספר זהות"
-        text={id}
-        onChange={(value) => setId(value)}
-        validate={() => {
-          return id.length < 7;
-        }}
-        errorMessage={"שדה זה חייב להכיל מינינום 7 תווים"}
+        required
+        variant="outlined"
+        error={touched?.id && !!errors?.id}
+        helperText={touched?.id && errors?.id}
+        {...getFieldProps("id")}
       />
-      <ValidateTextField
+      <TextField
         label="שם פרטי"
-        text={firstName}
-        onChange={(value) => setFirstName(value)}
-        validate={() => {
-          return firstName === "";
-        }}
-        errorMessage={"שדה חובה"}
-      />
-      <ValidateTextField
+        required
+        variant="outlined"
+        error={touched?.firstName && !!errors?.firstName}
+        helperText={touched?.firstName && errors?.firstName}
+        {...getFieldProps("firstName")}
+      />{" "}
+      <TextField
         label="שם משפחה"
-        text={lastName}
-        onChange={(value) => setLastName(value)}
-        validate={() => {
-          return lastName === "";
-        }}
-        errorMessage={"שדה חובה"}
-      />
-      <ValidateTextField
+        required
+        variant="outlined"
+        error={touched?.lastName && !!errors?.lastName}
+        helperText={touched?.lastName && errors?.lastName}
+        {...getFieldProps("lastName")}
+      />{" "}
+      <TextField
         label="מייל"
-        text={email}
-        onChange={(value) => setEmail(value)}
-        validate={() => {
-          return email === "";
-        }}
-        errorMessage={"שדה חובה"}
+        required
+        variant="outlined"
+        error={touched?.email && !!errors?.email}
+        helperText={touched?.email && errors?.email}
+        {...getFieldProps("email")}
       />
-      <ValidateTextField
+      <TextField
         label="טלפון"
-        text={phone}
-        onChange={(value) => setPhone(value)}
-        validate={() => {
-          return phone.length < 7;
-        }}
-        errorMessage={"שדה זה חייב להכיל מינימום 7 תווים"}
+        required
+        variant="outlined"
+        error={touched?.phone && !!errors?.phone}
+        helperText={touched?.phone && errors?.phone}
+        {...getFieldProps("phone")}
+      />
+      <TextField
+        label="סיסמה לכניסות הבאות"
+        required
+        variant="outlined"
+        error={touched?.password && !!errors?.password}
+        helperText={touched?.password && errors?.password}
+        {...getFieldProps("password")}
       />
       <h1>פרטי מוסד</h1>
-      <ValidateTextField
+      <TextField
         label="סמל מוסד"
-        text={institutionSymbol}
-        onChange={(value) => setInstitutionSymbol(value)}
-        validate={() => {
-          return institutionSymbol === "" || !isnum(institutionSymbol);
-        }}
-        errorMessage={"חובה להכניס מספרים בלבד"}
+        required
+        variant="outlined"
+        error={touched?.institutionSymbol && !!errors?.institutionSymbol}
+        helperText={touched?.institutionSymbol && errors?.institutionSymbol}
+        {...getFieldProps("institutionSymbol")}
       />
-      <ValidateTextField
+      <TextField
         label="שם מוסד"
-        text={institutionName}
-        onChange={(value) => setInstitutionName(value)}
-        validate={() => {
-          return institutionName === "";
-        }}
-        errorMessage={"שדה חובה"}
+        required
+        variant="outlined"
+        error={touched?.institutionName && !!errors?.institutionName}
+        helperText={touched?.institutionName && errors?.institutionName}
+        {...getFieldProps("institutionName")}
+      />
+      <TextField
+        label="מייל מוסד"
+        required
+        variant="outlined"
+        error={touched?.institutionEmail && !!errors?.institutionEmail}
+        helperText={touched?.institutionEmail && errors?.institutionEmail}
+        {...getFieldProps("institutionEmail")}
+      />
+      <TextField
+        label="טלפון מוסד"
+        required
+        variant="outlined"
+        error={touched?.institutionPhone && !!errors?.institutionPhone}
+        helperText={touched?.institutionPhone && errors?.institutionPhone}
+        {...getFieldProps("institutionPhone")}
       />
       <h1> כתובת מוסד</h1>
-      <ValidateTextField
+      <TextField
         label="עיר"
-        text={city}
-        onChange={(value) => setCity(value)}
-        validate={() => {
-          return city === "";
-        }}
-        errorMessage={"שדה חובה"}
+        required
+        variant="outlined"
+        error={touched?.city && !!errors?.city}
+        helperText={touched?.city && errors?.city}
+        {...getFieldProps("city")}
       />
-      <ValidateTextField
+      <TextField
         label="רחוב"
-        text={street}
-        onChange={(value) => setStreet(value)}
-        validate={() => {
-          return street === "";
-        }}
-        errorMessage={"שדה חובה"}
+        required
+        variant="outlined"
+        error={touched?.street && !!errors?.street}
+        helperText={touched?.street && errors?.street}
+        {...getFieldProps("street")}
       />
-      <ValidateTextField
-        label="מספר"
-        text={homeNumber}
-        onChange={(value) => setHomeNumber(value)}
-        validate={() => {
-          return homeNumber === "" || !isnum(homeNumber);
-        }}
-        errorMessage={"חובה להכניס מספרים בלבד"}
+      <TextField
+        label="מספר בנין"
+        required
+        variant="outlined"
+        error={touched?.homeNumber && !!errors?.homeNumber}
+        helperText={touched?.homeNumber && errors?.homeNumber}
+        {...getFieldProps("homeNumber")}
       />
       <h1>דרישות מוסד</h1>
-      <ValidateSelect
+      <TextField
         label="שנות נסיון"
-        options={toOption(0, 30)}
-        onChange={(e) => setExperience(e)}
+        type="number"
+        variant="outlined"
+        InputProps={{ inputProps: { min: 0, max: 30 } }}
+        {...getFieldProps("experience")}
       />
-      <ValidateSelect
-        label="תעודת הוראה"
-        options={require}
-        onChange={(e) => setTeachingCertificate(e)}
-      />
-      <ValidateSelect
+      <TextField
         label="גיל מינימלי"
-        options={toOption(16, 40)}
-        onChange={(e) => setMinAge(e)}
+        type="number"
+        variant="outlined"
+        InputProps={{ inputProps: { min: 18, max: 40 } }}
+        {...getFieldProps("minAge")}
       />
-      <ValidateSelect
+      <RadioGroup
         label="מין"
         options={genderOptions}
-        onChange={(e) => setGender(e)}
+        {...getFieldProps("gender")}
       />
-      <ValidateSelect
+      <FormControlLabel
+        control={<Checkbox color="primary" {...getFieldProps("BJGraduate")} />}
         label="בוגרת בית יעקב"
-        options={require}
-        onChange={(e) => setBJGraduate(e)}
+      />
+      <FormControlLabel
+        control={
+          <Checkbox color="primary" {...getFieldProps("teachingCertificate")} />
+        }
+        label="תעודת הוראה"
       />
       <Button type="submit" variant="contained" color="primary">
         אישור
@@ -167,4 +243,4 @@ const SignUpTeacher = () => {
   );
 };
 
-export default SignUpTeacher;
+export default SignUpPrincipal;
