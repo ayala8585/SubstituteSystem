@@ -1,5 +1,10 @@
 import React from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import {
+  Route,
+  Redirect,
+  Switch,
+  BrowserRouter as Router,
+} from "react-router-dom";
 
 import "./App.css";
 import Login from "./components/login/login";
@@ -49,8 +54,7 @@ function App() {
             <Home />
           </Route>
           <Route path="/">
-            <Login />
-            <SignUp />
+            <Redirect to="/login" />
           </Route>
         </Switch>
       </Router>
