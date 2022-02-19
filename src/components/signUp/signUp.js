@@ -38,7 +38,7 @@ const SignUp = () => {
         variant="contained"
         color="primary"
         disableElevation
-        onClick={() => generalSignUp(3)}
+        onClick={() => history.push("/SignUpSubstitute")}
       >
         הרשם כמורה ממלא מקום
       </Button>
