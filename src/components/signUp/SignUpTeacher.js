@@ -5,7 +5,6 @@ import { Button, TextField } from "@material-ui/core";
 
 import "./signUpTeacher.css";
 import ValidateSelect from "../common/validateSelect";
-import ValidateTextField from "../common/validateTextField";
 
 const validationSchema = yup.object({
   id: yup
@@ -66,7 +65,7 @@ const SignUpTeacher = () => {
     },
     onSubmit,
     validateOnChange: false,
-    validationSchema: validationSchema,
+    validationSchema,
   });
 
   return (
